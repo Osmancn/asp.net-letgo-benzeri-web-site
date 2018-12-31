@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" im href="index">
+                <img src="~/image/logo5.png" />
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index">
+                            Keşfet
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profil">Profil</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="urunekle">Ürün Ekle</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="~/NeLazim/Login">Çıkış Yap</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <br>
+    <br>
+    <br> <br>
+    <br /><br />
+    <form class="form-horizontal" method="post" action="">
+        <fieldset>
+            <br><br><br>
+
+            <!-- Form Name -->
+            <legend>PRODUCTS</legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label">Ad</label>
+                <div class="col-md-4">
+                    <input id="product_name" name="ad" class="form-control input-md" required="" type="text">
+
+                </div>
+            </div>
+
+            <!-- Select Basic -->
+            <div class="form-group">
+                <label class="col-md-4 control-label">Kategori</label>
+                <div class="col-md-4">
+                    <select id="product_categorie" name="katID" class="form-control">
+                        <option value="0"></option>
+                        <option value="1">Araba</option>
+                        <option value="2">Elektronik</option>
+                        <option value="3">Emlak</option>
+                        <option value="4">Giyim</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">AÇIKLAMA</label>
+                <div class="col-md-4">
+                    <input id="available_quantity" name="aciklama" placeholder="AVAILABLE QUANTITY" class="form-control input-md" required="" type="text">
+
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label">FİYAT</label>
+                <div class="col-md-4">
+                    <input id="product_weight" name="fiyat" placeholder="PRODUCT WEIGHT" class="form-control input-md" required="" type="text">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label">Fotoğraf Linki</label>
+                <div class="col-md-4">
+                    <input id="product_weight" name="fotolink" placeholder="Link" class="form-control input-md" required="" type="text">
+
+                </div>
+            </div>
+
+
+
+            <!-- Button -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="singlebutton"></label>
+                <div class="col-md-4">
+                    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Ekle</button>
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+</body>
+</html>

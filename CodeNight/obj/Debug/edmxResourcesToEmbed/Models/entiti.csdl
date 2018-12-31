@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NeLazımDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblKategori">
+    <Key>
+      <PropertyRef Name="kategoriID" />
+    </Key>
+    <Property Name="kategoriID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kategoriAd" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tblUrun" Relationship="Self.FK_tblUrun_tblKategori" FromRole="tblKategori" ToRole="tblUrun" />
+  </EntityType>
+  <EntityType Name="tblKullanici">
+    <Key>
+      <PropertyRef Name="kullaniciID" />
+    </Key>
+    <Property Name="kullaniciID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ad" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="soyad" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="eposta" Type="String" MaxLength="30" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="sifre" Type="String" MaxLength="16" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="kullaniciFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblMesaj" Relationship="Self.FK_tblMesaj_tblKullanici" FromRole="tblKullanici" ToRole="tblMesaj" />
+    <NavigationProperty Name="tblMesaj1" Relationship="Self.FK_tblMesaj_tblKullanici1" FromRole="tblKullanici" ToRole="tblMesaj" />
+    <NavigationProperty Name="tblUrun" Relationship="Self.FK_tblUrun_tblKullanici" FromRole="tblKullanici" ToRole="tblUrun" />
+    <NavigationProperty Name="tblUrun1" Relationship="Self.tblFavori" FromRole="tblKullanici" ToRole="tblUrun" />
+  </EntityType>
+  <EntityType Name="tblUrun">
+    <Key>
+      <PropertyRef Name="urunID" />
+    </Key>
+    <Property Name="urunID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="kategoriID" Type="Int32" Nullable="false" />
+    <Property Name="kullaniciID" Type="Int32" Nullable="false" />
+    <Property Name="urunAd" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="urunAciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="satildigiKonum" Type="Double" />
+    <Property Name="satildigiTarih" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fiyat" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="fotolink" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblKategori" Relationship="Self.FK_tblUrun_tblKategori" FromRole="tblUrun" ToRole="tblKategori" />
+    <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblUrun_tblKullanici" FromRole="tblUrun" ToRole="tblKullanici" />
+    <NavigationProperty Name="tblUrunFoto" Relationship="Self.FK_tblUrunFoto_tblUrun" FromRole="tblUrun" ToRole="tblUrunFoto" />
+    <NavigationProperty Name="tblKullanici1" Relationship="Self.tblFavori" FromRole="tblUrun" ToRole="tblKullanici" />
+  </EntityType>
+  <EntityType Name="tblMesaj">
+    <Key>
+      <PropertyRef Name="gondericiID" />
+      <PropertyRef Name="aliciID" />
+      <PropertyRef Name="mesaj" />
+      <PropertyRef Name="tarih" />
+    </Key>
+    <Property Name="gondericiID" Type="Int32" Nullable="false" />
+    <Property Name="aliciID" Type="Int32" Nullable="false" />
+    <Property Name="mesaj" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="tarih" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="tblKullanici" Relationship="Self.FK_tblMesaj_tblKullanici" FromRole="tblMesaj" ToRole="tblKullanici" />
+    <NavigationProperty Name="tblKullanici1" Relationship="Self.FK_tblMesaj_tblKullanici1" FromRole="tblMesaj" ToRole="tblKullanici" />
+  </EntityType>
+  <EntityType Name="tblUrunFoto">
+    <Key>
+      <PropertyRef Name="urunID" />
+      <PropertyRef Name="urunFoto" />
+    </Key>
+    <Property Name="urunID" Type="Int32" Nullable="false" />
+    <Property Name="urunFoto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblUrun" Relationship="Self.FK_tblUrunFoto_tblUrun" FromRole="tblUrunFoto" ToRole="tblUrun" />
+  </EntityType>
+  <Association Name="FK_tblUrun_tblKategori">
+    <End Role="tblKategori" Type="Self.tblKategori" Multiplicity="1" />
+    <End Role="tblUrun" Type="Self.tblUrun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKategori">
+        <PropertyRef Name="kategoriID" />
+      </Principal>
+      <Dependent Role="tblUrun">
+        <PropertyRef Name="kategoriID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMesaj_tblKullanici">
+    <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+    <End Role="tblMesaj" Type="Self.tblMesaj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKullanici">
+        <PropertyRef Name="kullaniciID" />
+      </Principal>
+      <Dependent Role="tblMesaj">
+        <PropertyRef Name="aliciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblMesaj_tblKullanici1">
+    <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+    <End Role="tblMesaj" Type="Self.tblMesaj" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKullanici">
+        <PropertyRef Name="kullaniciID" />
+      </Principal>
+      <Dependent Role="tblMesaj">
+        <PropertyRef Name="gondericiID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUrun_tblKullanici">
+    <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="1" />
+    <End Role="tblUrun" Type="Self.tblUrun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblKullanici">
+        <PropertyRef Name="kullaniciID" />
+      </Principal>
+      <Dependent Role="tblUrun">
+        <PropertyRef Name="kullaniciID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblUrunFoto_tblUrun">
+    <End Role="tblUrun" Type="Self.tblUrun" Multiplicity="1" />
+    <End Role="tblUrunFoto" Type="Self.tblUrunFoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblUrun">
+        <PropertyRef Name="urunID" />
+      </Principal>
+      <Dependent Role="tblUrunFoto">
+        <PropertyRef Name="urunID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="tblFavori">
+    <End Role="tblKullanici" Type="Self.tblKullanici" Multiplicity="*" />
+    <End Role="tblUrun" Type="Self.tblUrun" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="databasee" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblKategori" EntityType="Self.tblKategori" />
+    <EntitySet Name="tblKullanici" EntityType="Self.tblKullanici" />
+    <EntitySet Name="tblUrun" EntityType="Self.tblUrun" />
+    <EntitySet Name="tblMesaj" EntityType="Self.tblMesaj" />
+    <EntitySet Name="tblUrunFoto" EntityType="Self.tblUrunFoto" />
+    <AssociationSet Name="FK_tblUrun_tblKategori" Association="Self.FK_tblUrun_tblKategori">
+      <End Role="tblKategori" EntitySet="tblKategori" />
+      <End Role="tblUrun" EntitySet="tblUrun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMesaj_tblKullanici" Association="Self.FK_tblMesaj_tblKullanici">
+      <End Role="tblKullanici" EntitySet="tblKullanici" />
+      <End Role="tblMesaj" EntitySet="tblMesaj" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblMesaj_tblKullanici1" Association="Self.FK_tblMesaj_tblKullanici1">
+      <End Role="tblKullanici" EntitySet="tblKullanici" />
+      <End Role="tblMesaj" EntitySet="tblMesaj" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUrun_tblKullanici" Association="Self.FK_tblUrun_tblKullanici">
+      <End Role="tblKullanici" EntitySet="tblKullanici" />
+      <End Role="tblUrun" EntitySet="tblUrun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblUrunFoto_tblUrun" Association="Self.FK_tblUrunFoto_tblUrun">
+      <End Role="tblUrun" EntitySet="tblUrun" />
+      <End Role="tblUrunFoto" EntitySet="tblUrunFoto" />
+    </AssociationSet>
+    <AssociationSet Name="tblFavori" Association="Self.tblFavori">
+      <End Role="tblKullanici" EntitySet="tblKullanici" />
+      <End Role="tblUrun" EntitySet="tblUrun" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NeLazımDatabaseModelStoreContainer" CdmEntityContainer="databasee">
+    <EntitySetMapping Name="tblKategori">
+      <EntityTypeMapping TypeName="NeLazımDatabaseModel.tblKategori">
+        <MappingFragment StoreEntitySet="tblKategori">
+          <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+          <ScalarProperty Name="kategoriAd" ColumnName="kategoriAd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblKullanici">
+      <EntityTypeMapping TypeName="NeLazımDatabaseModel.tblKullanici">
+        <MappingFragment StoreEntitySet="tblKullanici">
+          <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+          <ScalarProperty Name="ad" ColumnName="ad" />
+          <ScalarProperty Name="soyad" ColumnName="soyad" />
+          <ScalarProperty Name="eposta" ColumnName="eposta" />
+          <ScalarProperty Name="sifre" ColumnName="sifre" />
+          <ScalarProperty Name="kullaniciFoto" ColumnName="kullaniciFoto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUrun">
+      <EntityTypeMapping TypeName="NeLazımDatabaseModel.tblUrun">
+        <MappingFragment StoreEntitySet="tblUrun">
+          <ScalarProperty Name="urunID" ColumnName="urunID" />
+          <ScalarProperty Name="kategoriID" ColumnName="kategoriID" />
+          <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+          <ScalarProperty Name="urunAd" ColumnName="urunAd" />
+          <ScalarProperty Name="urunAciklama" ColumnName="urunAciklama" />
+          <ScalarProperty Name="satildigiKonum" ColumnName="satildigiKonum" />
+          <ScalarProperty Name="satildigiTarih" ColumnName="satildigiTarih" />
+          <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+          <ScalarProperty Name="fotolink" ColumnName="fotolink" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblMesaj">
+      <EntityTypeMapping TypeName="NeLazımDatabaseModel.tblMesaj">
+        <MappingFragment StoreEntitySet="tblMesaj">
+          <ScalarProperty Name="gondericiID" ColumnName="gondericiID" />
+          <ScalarProperty Name="aliciID" ColumnName="aliciID" />
+          <ScalarProperty Name="mesaj" ColumnName="mesaj" />
+          <ScalarProperty Name="tarih" ColumnName="tarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUrunFoto">
+      <EntityTypeMapping TypeName="NeLazımDatabaseModel.tblUrunFoto">
+        <MappingFragment StoreEntitySet="tblUrunFoto">
+          <ScalarProperty Name="urunID" ColumnName="urunID" />
+          <ScalarProperty Name="urunFoto" ColumnName="urunFoto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="tblFavori" TypeName="NeLazımDatabaseModel.tblFavori" StoreEntitySet="tblFavori">
+      <EndProperty Name="tblKullanici">
+        <ScalarProperty Name="kullaniciID" ColumnName="kullaniciID" />
+      </EndProperty>
+      <EndProperty Name="tblUrun">
+        <ScalarProperty Name="urunID" ColumnName="urunID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

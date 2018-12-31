@@ -1,0 +1,384 @@
+﻿<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<meta charset="utf-8">
+<!DOCTYPE html>
+@model CodeNight.Models.tblUrun
+<html lang="en">
+
+  <head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ürün Detayları</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <style type="text/css">
+
+    html, body, #map {
+            width: 100%; height: 100%; padding: 0; margin: 0;
+        }
+
+  
+    
+
+body {
+  font-family: 'open sans';
+  overflow-x: hidden; }
+
+img {
+  max-width: 100%; }
+
+.preview {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  @@media screen and (max-width: 996px) {
+    .preview {
+      margin-bottom: 20px; } }
+
+.preview-pic {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.preview-thumbnail.nav-tabs {
+  border: none;
+  margin-top: 15px; }
+  .preview-thumbnail.nav-tabs li {
+    width: 18%;
+    margin-right: 2.5%; }
+    .preview-thumbnail.nav-tabs li img {
+      max-width: 100%;
+      display: block; }
+    .preview-thumbnail.nav-tabs li a {
+      padding: 0;
+      margin: 0; }
+    .preview-thumbnail.nav-tabs li:last-of-type {
+      margin-right: 0; }
+
+.tab-content {
+  overflow: hidden; }
+  .tab-content img {
+    width: 100%;
+    -webkit-animation-name: opacity;
+            animation-name: opacity;
+    -webkit-animation-duration: .3s;
+            animation-duration: .3s; }
+
+.card {
+  margin-top: 50px;
+  background: #eee;
+  padding: 3em;
+  line-height: 1.5em; }
+
+@@media screen and (min-width: 997px) {
+  .wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; } }
+
+.details {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.colors {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.product-title, .price, .sizes, .colors {
+  text-transform: UPPERCASE;
+  font-weight: bold; }
+
+.checked, .price span {
+  color: #ff9f1a; }
+
+.product-title, .rating, .product-description, .price, .vote, .sizes {
+  margin-bottom: 15px; }
+
+.product-title {
+  margin-top: 0; }
+
+.size {
+  margin-right: 10px; }
+  .size:first-of-type {
+    margin-left: 40px; }
+
+.color {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 2em;
+  width: 2em;
+  border-radius: 2px; }
+  .color:first-of-type {
+    margin-left: 20px; }
+
+.add-to-cart, .like {
+  background: #ff9f1a;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  -webkit-transition: background .3s ease;
+          transition: background .3s ease; }
+  .add-to-cart:hover, .like:hover {
+    background: #b36800;
+    color: #fff; }
+
+.not-available {
+  text-align: center;
+  line-height: 2em; }
+  .not-available:before {
+    font-family: fontawesome;
+    content: "\f00d";
+    color: #fff; }
+
+.orange {
+  background: #ff9f1a; }
+
+.green {
+  background: #85ad00; }
+
+.blue {
+  background: #0076ad; }
+
+.tooltip-inner {
+  padding: 1.3em; }
+
+@@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@@keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+
+  </style>
+  </head>
+
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+          <div class="container">
+              <a class="navbar-brand" im href="~/NeLazim/index">
+                  <img src="~/image/logo5.png" />
+              </a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarResponsive">
+                  <ul class="navbar-nav ml-auto">
+                      <li class="nav-item active">
+                          <a class="nav-link" href="~/NeLazim/index">
+                              Keşfet
+                              <span class="sr-only">(current)</span>
+                          </a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="~/NeLazim/profil">Profil</a>
+                      </li>
+
+                      <li class="nav-item">
+                          <a class="nav-link" href="~/NeLazim/urunekle">Ürün Ekle</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="~/NeLazim/Login">Çıkış Yap</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </nav>
+      <br>
+      <br>
+      <br> <br>
+      <br /><br />
+      <div class="container">
+          <div class="card">
+              <div class="container-fliud">
+                  <div class="wrapper row">
+                      <div class="preview col-md-6">
+
+                          <div class="preview-pic tab-content">
+                              <div class="tab-pane active" id="pic-1"><img src="@Model.fotolink" /></div>
+                          </div>
+                          <div class="preview-pic tab-content">
+
+
+
+                          </div>
+                          <div class="details col-md-6">
+                              <h3 class="product-title">@Model.urunAd</h3>
+                              <div class="rating">
+                                  <div class="stars">
+
+                                  </div>
+
+                              </div>
+                              <p class="product-description">@Model.urunAciklama</p>
+                              <h4 class="price">Satış Fiyatı: <span>@Model.fiyat ₺</span></h4>
+
+
+                              <div class="action">
+                                  <button class="add-to-cart btn btn-default" type="button">Mesaj At</button>
+                                  <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                                  <div class="tab-pane active" id="map">
+                                  <script src="https://api-maps.yandex.ru/2.1/?lang=en_RU&amp;apikey=ca437703-2ad1-41b0-9c3d-a91116b108c9" type="text/javascript"></script></div>
+                              </div>
+
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </body>
+</html>
+
+
+<script>
+    
+ymaps.ready(init);
+
+function init() {
+    var myMap = new ymaps.Map("map", {
+            center: [55.76, 37.64],
+            zoom: 10
+        }, {
+            searchControlProvider: 'yandex#search'
+        }),
+
+    // Creating a geo object with the "Point" geometry type.
+        myGeoObject = new ymaps.GeoObject({
+            // The geometry description.
+            geometry: {
+                type: "Point",
+                coordinates: [55.8, 37.8]
+            },
+            // Properties.
+            properties: {
+                // The placemark content.
+                iconContent: 'I\'m draggable',
+                hintContent: 'Come on, drag already!'
+            }
+        }, {
+            /**
+             * Options.
+             * The placemark's icon will stretch to fit its contents.
+             */
+            preset: 'islands#blackStretchyIcon',
+            // The placemark can be dragged.
+            draggable: true
+        }),
+        myPieChart = new ymaps.Placemark([
+            55.847, 37.6
+        ], {
+            // Data for generating a diagram.
+            data: [
+                {weight: 8, color: '#0E4779'},
+                {weight: 6, color: '#1E98FF'},
+                {weight: 4, color: '#82CDFF'}
+            ],
+            iconCaption: "Diagram"
+        }, {
+            // Defining a custom placemark layout.
+            iconLayout: 'default#pieChart',
+            // Radius of the diagram, in pixels.
+            iconPieChartRadius: 30,
+            // The radius of the central part of the layout.
+            iconPieChartCoreRadius: 10,
+            // Fill style for the core.
+            iconPieChartCoreFillStyle: '#ffffff',
+            // The style for lines between sectors and the outline of the diagram.
+            iconPieChartStrokeStyle: '#ffffff',
+            // Width of the sector dividing lines and diagram outline.
+            iconPieChartStrokeWidth: 3,
+            // Maximum width of the placemark caption.
+            iconPieChartCaptionMaxWidth: 200
+        });
+
+    myMap.geoObjects
+        .add(myGeoObject)
+        .add(myPieChart)
+        .add(new ymaps.Placemark([55.684758, 37.738521], {
+            balloonContent: 'the color of <strong>the water on Bondi Beach</strong>'
+        }, {
+            preset: 'islands#icon',
+            iconColor: '#0095b6'
+        }))
+        .add(new ymaps.Placemark([55.833436, 37.715175], {
+            balloonContent: '<strong>greyish-brownish-maroon</strong> color'
+        }, {
+            preset: 'islands#dotIcon',
+            iconColor: '#735184'
+        }))
+        .add(new ymaps.Placemark([55.687086, 37.529789], {
+            balloonContent: 'the color of <strong>enamored toads</strong>'
+        }, {
+            preset: 'islands#circleIcon',
+            iconColor: '#3caa3c'
+        }))
+        .add(new ymaps.Placemark([55.782392, 37.614924], {
+            balloonContent: 'the color of <strong>Surprise Dauphin</strong>'
+        }, {
+            preset: 'islands#circleDotIcon',
+            iconColor: 'yellow'
+        }))
+        .add(new ymaps.Placemark([55.642063, 37.656123], {
+            balloonContent: '<strong>red</strong> color'
+        }, {
+            preset: 'islands#redSportIcon'
+        }))
+        .add(new ymaps.Placemark([55.826479, 37.487208], {
+            balloonContent: '<strong>Facebook</strong> color'
+        }, {
+            preset: 'islands#governmentCircleIcon',
+            iconColor: '#3b5998'
+        }))
+        .add(new ymaps.Placemark([55.694843, 37.435023], {
+            balloonContent: '<strong>crocodile\'s nose</strong> color',
+            iconCaption: 'Really, really long but super interesting text'
+        }, {
+            preset: 'islands#greenDotIconWithCaption'
+        }))
+        .add(new ymaps.Placemark([55.790139, 37.814052], {
+            balloonContent: '<strong>blue</strong> color',
+            iconCaption: 'Really, really long but super interesting text'
+        }, {
+            preset: 'islands#blueCircleDotIconWithCaption',
+            iconCaptionMaxWidth: '50'
+        }));
+}
+
+</script>
